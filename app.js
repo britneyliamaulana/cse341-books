@@ -12,17 +12,40 @@ app.get('/', (req, res) => {
     });
 });
 
-app.get('/trails', async (req, res) => {
+app.get('/books', async (req, res) => {
   try {
-    const trails = await getDb()
-      .collection('trails')
+    const books = await getDb()
+      .collection('books')
       .find({})
       .toArray();
 
-    return res.status(200).json(trails);
+    return res.status(200).json(books);
   } catch (error) {
-    console.error('Failed to retrieve trails:', error.message);
-    return res.status(500).json({ message: 'Failed to retrieve trails' });
+    console.error('Failed to retrieve books:', error.message);
+    return res.status(500).json({
+      message: 'Internal server error'
+    });
+  }
+});
+
+app.get('/books/:id', async (req, res) => {
+  try {
+    const book = await getDb()
+      .collection('books')
+      .findOne({ id: req.params.id });
+
+    if (!book) {
+      return res.status(404).json({
+        message: 'Book not found'
+      });
+    }
+
+    return res.status(200).json(book);
+  } catch (error) {
+    console.error('Failed to retrieve book:', error.message);
+    return res.status(500).json({
+      message: 'Internal server error'
+    });
   }
 });
 
