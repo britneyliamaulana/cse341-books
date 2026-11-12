@@ -11,15 +11,15 @@ const options = {
       description: 'API for managing books and authors.'
     },
     servers: [
-      {
-        url: 'http://localhost:3000',
-        description: 'Local development server'
-      },
-      {
-        url: 'https://cse341-books-d7kn.onrender.com',
-        description: 'Production server'
-      }
-    ]
+  {
+    url: 'https://cse341-books-d7kn.onrender.com',
+    description: 'Production server'
+  },
+  {
+    url: 'http://localhost:3000',
+    description: 'Local development server'
+  }
+ ]
   },
   apis: ['./app.js']
 };
